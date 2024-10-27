@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="Main">
+        <div class="header">
+            <a href="index.html"><img src="images/logo.png" width="160" height="160" alt="logo" /></a>
+            <nav>
+                <ul class="navbar">
+                    <a href="index.html"><li>Products</li></a>
+                    <hr>
+                </ul>
+            </nav>
+            <a href="cart.html"><div class="cartGroup">
+                <img class="cart" src="images/cart_icon.png" alt="cart" />
+                <div class="quantity">0</div>
+            </div></a>
+        </div>
+    </header>
+    <div class="cartItems">
+        <h2>Your Cart</h2>
+        <div class="cartTitle">
+            <p></p>
+            <h3>Title</h3>
+            <h3>Price</h3>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve cart data from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.querySelector('.cartItems');
+
+        // Check if cart is empty and display appropriate message
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML += "<p>Your cart is empty</p>";
+        } else {
+            // Loop through each product and display it
+            cart.forEach(product => {
+                const item = `
+                    <div class="cartItem">
+                        <img src="${product.image}" alt="${product.title}" width="100px" />
+                        <h4>${product.title}</h4>
+                        <p>Price: $${product.price}</p>
+                    </div>
+                `;
+                cartItemsContainer.innerHTML += item;
+            });
+        }
+    </script>
+</body>
+</html>
